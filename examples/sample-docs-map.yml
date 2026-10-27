@@ -1,0 +1,21 @@
+version: 1
+paths:
+  doc_root: docs
+  source_roots:
+    - src
+site:
+  framework: vitepress
+  config: docs/.vitepress/config.mts
+  output_dir: docs/.vitepress/dist
+sync_policy:
+  semantic_edits_require_review: true
+  mappings:
+    - source: src/domain/order-schema.ts
+      documents:
+        - docs/architecture/order-data-model.md
+        - docs/reference/order-contract.md
+      checks:
+        - fields-and-types
+      semantic_review_required: true
+redundancy_policy:
+  prefer_delete_or_merge_over_second_copy: true

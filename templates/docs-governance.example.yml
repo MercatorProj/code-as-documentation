@@ -1,0 +1,49 @@
+# Copy to .governance/docs.yml and adapt to the repository.
+version: 1
+project:
+  name: Replace with project name
+  documentation_language: en
+  audiences:
+    - product
+    - development
+    - operations
+paths:
+  doc_root: docs
+  source_roots:
+    - src
+  excluded_dirs:
+    - node_modules
+    - dist
+    - build
+  reports_dir: artifacts/documentation-governance
+site:
+  enabled: true
+  framework: vitepress
+  config: docs/.vitepress/config.mts
+  output_dir: docs/.vitepress/dist
+  local_preview_only: true
+  offline_delivery: true
+  online_publish_allowed: false
+automation:
+  mode: manual
+  git_hooks: false
+  ci: false
+  scheduled_checks: false
+sync_policy:
+  semantic_edits_require_review: true
+  report_only_by_default: true
+  mappings:
+    # Map a canonical source to the documents that explain it.
+    # - source: src/domain/schema.ts
+    #   documents:
+    #     - docs/architecture/data-model.md
+    #   checks:
+    #     - fields-and-types
+    #   semantic_review_required: true
+redundancy_policy:
+  prefer_delete_or_merge_over_second_copy: true
+  require_approval_for_delete_or_archive: true
+migration_policy:
+  require_approval_for_bulk_moves: true
+  require_approval_for_delete_or_overwrite: true
+  preserve_unrelated_git_changes: true
